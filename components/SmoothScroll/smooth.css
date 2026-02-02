@@ -1,0 +1,22 @@
+/* 
+ * Smooth Scroll Container
+ * Decouples visual position from scroll position
+ */
+.smooth-scroll-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  will-change: transform; /* Hardware acceleration hint */
+  z-index: 1; /* Below Navbar (100) and Preloader (9999) */
+  
+  /* 
+   * Bugatti Feel: 
+   * We add a tiny bit of backface visibility to prevent flickering 
+   * during high-speed GPU transforms.
+   */
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

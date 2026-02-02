@@ -1,0 +1,68 @@
+/* Theme Variables */
+:root {
+  --preloader-bg: #f7f7f5;
+  --preloader-text: #141414;
+  --preloader-accent: #d02029;
+}
+
+/* Main Overlay */
+.preloader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--preloader-bg);
+  color: var(--preloader-text);
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Content Container */
+.preloader-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+/* Logo Wrapper */
+.preloader-logo-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 210px;
+}
+
+@media (min-width: 420px) {
+  .preloader-logo-wrapper {
+    max-width: 220px;
+  }
+}
+
+
+@media (min-width: 640px) {
+  .preloader-logo-wrapper {
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .preloader-logo-wrapper {
+    max-width: 480px;
+  }
+}
+
+/* Ensure Logo scales nicely inside */
+.preloader-logo-wrapper .nav-logo-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  /* Reset height set in logo.css to allow fluid width */
+  max-height: none; 
+}

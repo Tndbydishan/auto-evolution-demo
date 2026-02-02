@@ -1,0 +1,176 @@
+/* 
+ * PageHero Component Styles
+ * Updated for Floating/Gap Layout
+ */
+
+.page-hero-container {
+  position: relative;
+  
+  /* FLOATING LAYOUT CONFIGURATION */
+  /* Wider Mobile Width: calc(100% - 1rem) gives 0.5rem margin on sides (was 1.5rem) */
+  width: calc(100% - 1rem); 
+  margin-top: 5.5rem; /* ~88px */
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.15);
+  
+  /* Mobile Height: Reduced to prevent overwhelming small screens */
+  height: 50vh; 
+  min-height: 350px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background-color: #121212;
+  transform: translateZ(0);
+}
+
+@media (min-width: 768px) {
+  .page-hero-container {
+    /* Wider Tablet Width: calc(100% - 2rem) gives 1rem margin on sides (was 4rem) */
+    width: calc(100% - 2rem);
+    margin-top: 8rem;
+    border-radius: 1.25rem;
+    height: 70vh; 
+    min-height: 500px;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero-container {
+    height: 80vh;
+    /* Increased Max Width for Desktop/4K to be wider than content (was 1600px) */
+    max-width: 1800px; 
+  }
+}
+
+/* --- Media Layer (Background) --- */
+.page-hero-media-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.page-hero-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  animation: heroMediaFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes heroMediaFadeIn {
+  from { opacity: 0; transform: scale(1.1); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Gradient Overlay --- */
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+/* --- Content Layer --- */
+.page-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 0 1.25rem 2rem 1.25rem; /* Mobile padding */
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .page-hero-content {
+    padding: 0 3rem 4rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero-content {
+    padding: 0 5rem 5rem 5rem;
+  }
+}
+
+/* Typography */
+.page-hero-subtitle {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.65rem; /* text-xs mobile */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #D12027;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: heroTextSlideUp 0.8s ease-out 0.5s forwards;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 768px) {
+  .page-hero-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+}
+
+.page-hero-title {
+  font-family: "Akira Expanded", sans-serif;
+  font-size: 1.75rem; /* ~28px mobile friendly */
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: heroTextSlideUp 0.8s ease-out 0.3s forwards;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+@media (min-width: 480px) {
+  .page-hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-hero-title {
+    font-size: 4rem; /* ~text-6xl */
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero-title {
+    font-size: 5rem; 
+  }
+}
+
+@media (min-width: 1440px) {
+  .page-hero-title {
+    font-size: 6rem;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes heroTextSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
