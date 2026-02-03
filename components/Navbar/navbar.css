@@ -29,10 +29,10 @@
   height: 50px;
   border-radius: 9999px;
   /* Glass Background */
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(129, 129, 129, 0.205);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(53, 53, 53, 0.151);
   
   display: flex;
   align-items: center;
@@ -74,15 +74,12 @@
   position: relative;
   padding: 0.25rem 0;
   transition: color 0.3s ease;
-  
-  /* CRITICAL: Difference mode to invert colors based on background */
-  color: #F7F7F5;
-  mix-blend-mode: difference;
+  color: #121212;
 }
 
 .nav-link.active {
   /* Active state remains difference but slightly accented if needed, or keeping it uniform */
-  color: #F7F7F5 !important; 
+  color: #d12027 !important; 
 }
 
 /* Underline Hover Effect */
@@ -93,7 +90,7 @@
   left: 0;
   height: 2px;
   width: 0%;
-  background-color: #F7F7F5;
+  background-color: #121212;
   mix-blend-mode: difference;
   transition: width 0.3s ease-out;
 }
@@ -137,6 +134,10 @@
   border: none;
   cursor: pointer;
   transition: transform 0.1s;
+  
+  /* CRITICAL: Difference mode applied to container to handle all child icons */
+  mix-blend-mode: difference;
+  color: #ffffff;
 }
 
 .nav-hamburger:active {
@@ -147,10 +148,7 @@
   font-size: 30px;
   position: absolute;
   transition: all 0.8s var(--nav-ease);
-  
-  /* CRITICAL: Apply mix blend to hamburger icon */
-  color: #F7F7F5 !important;
-  mix-blend-mode: difference;
+  color: currentColor; /* Inherit color from parent */
 }
 
 .nav-icon-open.hidden { opacity: 0; transform: rotate(180deg) scale(0.5); }
