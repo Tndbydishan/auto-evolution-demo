@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from './Navbar';
-import { Logo } from './Logo';
-import { Footer } from './Footer';
-import { Preloader } from './Preloader';
-import { SmoothScroll } from './SmoothScroll';
+// Explicitly importing from /index to bypass duplicate flat files (Navbar.tsx vs Navbar/index.tsx)
+import { Navbar } from './Navbar/index';
+import { Logo } from './Logo/index';
+import { Footer } from './Footer/index';
+import { Preloader } from './Preloader/index';
+import { SmoothScroll } from './SmoothScroll/index';
 import { NAV_LINKS, SOCIALS } from '../data';
 import { PageId } from '../types';
 
@@ -14,8 +15,15 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // Only show Preloader on the Home page
-  const [isLoading, setIsLoading] = useState(activePage === 'home');
+  
+  // PRELOADER: Only defaults to true if we are on the 'home' page AND haven't seen it yet in this session
+  const [isLoading, setIsLoading] = useState(() => {
+    if (activePage === 'home') {
+      const hasSeen = typeof window !== 'undefined' ? sessionStorage.getItem('hasSeenPreloader') : null;
+      return !hasSeen;
+    }
+    return false;
+  });
 
   // Manage Body Scroll Lock when Mobile Menu is open
   useEffect(() => {
@@ -41,20 +49,26 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
     }
   };
 
+  const handlePreloaderComplete = () => {
+    sessionStorage.setItem('hasSeenPreloader', 'true');
+    setIsLoading(false);
+  };
+
   return (
     <div className="bg-[#F7F7F5] text-[#121212] min-h-screen relative">
       
-      {/* PRELOADER - Only renders if isLoading is true (Home page only) */}
+      {/* PRELOADER - Only renders if isLoading is true (Home page only, once per session) */}
       {isLoading && (
-        <Preloader onComplete={() => setIsLoading(false)}>
+        <Preloader onComplete={handlePreloaderComplete}>
           <Logo disableLink className="w-full text-[#141414]" />
         </Preloader>
       )}
 
-      {/* FIXED LOGO - Removed mix-blend, set to dark color */}
+      {/* FIXED LOGO */}
+      {/* Removed mix-blend-mode: difference. Now solid dark color. */}
       <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto text-[#121212]">
         <a href="index.html" className="cursor-pointer block">
-          <Logo />
+          <Logo color="#121212" />
         </a>
       </div>
 
@@ -79,8 +93,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
         activePage={activePage}
       />
 
-      {/* MAIN CONTENT - Native Flow */}
-      {/* fade-in-page applied here to ensure content animates in, but doesn't break fixed nav */}
+      {/* MAIN CONTENT - Native Flow with Fade In */}
       <main className="w-full relative z-10 fade-in-page">
         <SmoothScroll>
           <div className="min-h-screen flex flex-col">

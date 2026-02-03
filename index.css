@@ -2,7 +2,6 @@
 html {
   width: 100%;
   box-sizing: border-box;
-  /* Native Smooth Scroll */
   scroll-behavior: smooth;
 }
 
@@ -15,8 +14,8 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  /* RESTORE NATIVE SCROLLING */
-  overflow-y: auto; 
+  /* CRITICAL: Force native scroll */
+  overflow-y: auto !important; 
   overflow-x: hidden;
   background-color: #f7f7f5;
   color: #121212;
@@ -46,13 +45,11 @@ body.menu-open {
   }
 }
 
-/* Typography Selection */
 ::selection {
   background-color: #d12027;
   color: #ffffff;
 }
 
-/* Custom Scrollbar Styling (Optional, keeps it looking premium) */
 ::-webkit-scrollbar {
   width: 10px;
 }

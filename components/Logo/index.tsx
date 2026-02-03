@@ -8,17 +8,9 @@ interface LogoProps {
   disableLink?: boolean;
 }
 
-/**
- * Logo Component
- * 
- * - Displays the Nav brand mark.
- * - Styles are defined in 'logo.css'.
- * - Adapts to parent color via `currentColor` or explicit prop.
- * - Updated Structure: Groups elements into 'logo-text-group' and 'logo-shapes-group' for GSAP animations.
- */
 export const Logo: React.FC<LogoProps> = ({ className, color, disableLink }) => {
   const Component = disableLink ? 'div' : 'a';
-  const props = disableLink ? {} : { href: "#", "aria-label": "Nav Home" };
+  const props = disableLink ? {} : { href: "index.html", "aria-label": "Nav Home" };
 
   return (
     <Component 
