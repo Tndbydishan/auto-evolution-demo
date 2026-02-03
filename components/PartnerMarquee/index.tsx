@@ -14,19 +14,56 @@ export const PartnerMarquee: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
+  // UPDATED: Using the 'href method' (Vite Asset URL) to resolve paths dynamically.
+  // This allows assets to live in 'resources/' without moving them to 'public/'.
+  // Vite will bundle these files and update the paths in the final build.
   const partners: Partner[] = [
-    { name: "Texa", logo: "/resources/logo-TEXA.jpg", href: "https://www.bosch.com", customWidth: "75px" },
-    { name: "Bosch", logo: "/resources/bosch.svg", href: "https://www.bosch.com", customWidth: "140px" },
-    { name: "Texa Edu", logo: "/resources/texaedu.png", href: "#", customWidth: "135px" },
-    { name: "IMI", logo: "/resources/imi-logo-min-original.png", href: "https://www.motul.com", customWidth: "190px" },
-    { name: "Electude", logo: "/resources/electude-logo-png-transparent.png", href: "https://www.denso.com", customWidth: "190px" },
-    { name: "ASE", logo: "/resources/ase-logo.png", href: "https://www.brembo.com", customWidth: "80px" },
-    { name: "Auto Evolution", logo: "/resources/auto-evolution.png", href: "https://www.brembo.com", customWidth: "180px" },
+    { 
+      name: "Texa", 
+      logo: new URL('../../resources/logo-TEXA.jpg', import.meta.url).href, 
+      href: "https://www.bosch.com", 
+      customWidth: "75px" 
+    },
+    { 
+      name: "Bosch", 
+      logo: new URL('../../resources/bosch.svg', import.meta.url).href, 
+      href: "https://www.bosch.com", 
+      customWidth: "140px" 
+    },
+    { 
+      name: "Texa Edu", 
+      logo: new URL('../../resources/texaedu.png', import.meta.url).href, 
+      href: "#", 
+      customWidth: "135px" 
+    },
+    { 
+      name: "IMI", 
+      logo: new URL('../../resources/imi-logo-min-original.png', import.meta.url).href, 
+      href: "https://www.motul.com", 
+      customWidth: "190px" 
+    },
+    { 
+      name: "Electude", 
+      logo: new URL('../../resources/electude-logo-png-transparent.png', import.meta.url).href, 
+      href: "https://www.denso.com", 
+      customWidth: "190px" 
+    },
+    { 
+      name: "ASE", 
+      logo: new URL('../../resources/ase-logo.png', import.meta.url).href, 
+      href: "https://www.brembo.com", 
+      customWidth: "80px" 
+    },
+    { 
+      name: "Auto Evolution", 
+      logo: new URL('../../resources/auto-evolution.png', import.meta.url).href, 
+      href: "https://www.brembo.com", 
+      customWidth: "180px" 
+    },
   ];
 
   // We duplicate the partners list to create the seamless loop effect.
   // [Set 1] [Set 2 (Clone)]
-  // We ensure there are enough items to fill widespread monitors by repeating the source list first.
   const baseList = [...partners, ...partners]; // Ensure base is wide enough
   const renderList = [...baseList, ...baseList]; // Double it for the seamless animation logic
 
@@ -66,10 +103,9 @@ export const PartnerMarquee: React.FC = () => {
       // 1. Setup the Infinite Animation
       // We animate x from 0 to -50% (because the track contains exactly 2 copies of the base list)
       // When it reaches -50%, it wraps back to 0. Since the halves are identical, it's seamless.
-      // Removed Observer control for constant unidirectional flow.
       gsap.to(track, { 
         xPercent: -50, 
-        duration: 80, // Slower speed (increased from 30)
+        duration: 80, // Slower speed
         ease: "none",
         repeat: -1
       });
