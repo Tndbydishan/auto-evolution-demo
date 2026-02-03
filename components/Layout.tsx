@@ -14,7 +14,8 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // Only show Preloader on the Home page
+  const [isLoading, setIsLoading] = useState(activePage === 'home');
 
   // Manage Body Scroll Lock when Mobile Menu is open
   useEffect(() => {
@@ -43,15 +44,15 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
   return (
     <div className="bg-[#F7F7F5] text-[#121212] min-h-screen relative">
       
-      {/* PRELOADER */}
+      {/* PRELOADER - Only renders if isLoading is true (Home page only) */}
       {isLoading && (
         <Preloader onComplete={() => setIsLoading(false)}>
           <Logo disableLink className="w-full text-[#141414]" />
         </Preloader>
       )}
 
-      {/* FIXED LOGO - Z-Index 110 to stay above content */}
-      <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto mix-blend-difference text-[#F7F7F5]">
+      {/* FIXED LOGO - Removed mix-blend, set to dark color */}
+      <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto text-[#121212]">
         <a href="index.html" className="cursor-pointer block">
           <Logo />
         </a>

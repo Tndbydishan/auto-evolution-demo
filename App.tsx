@@ -51,8 +51,8 @@ export default function App() {
         </Preloader>
       )}
 
-      {/* FIXED LOGO */}
-      <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto mix-blend-difference text-[#F7F7F5]">
+      {/* FIXED LOGO - Removed mix-blend */}
+      <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto text-[#121212]">
         <div onClick={() => setCurrentPage('home')} className="cursor-pointer">
           <Logo />
         </div>
