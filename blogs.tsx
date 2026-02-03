@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Layout } from './components/Layout';
-import { Home } from './pages/Home';
+import { Blogs } from './pages/Blogs';
 import './index.css';
 
-const HomePage: React.FC = () => {
+const BlogsPage: React.FC = () => {
   return (
-    <Layout activePage="home">
-      <Home />
+    <Layout activePage="blogs">
+      <Blogs />
     </Layout>
   );
 };
@@ -17,7 +17,7 @@ if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <HomePage />
+      <BlogsPage />
     </React.StrictMode>
   );
 }

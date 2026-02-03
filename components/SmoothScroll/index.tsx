@@ -3,147 +3,150 @@ import './smooth.css';
 
 interface SmoothScrollProps {
   children: React.ReactNode;
-  /**
-   * The "Weight" of the scroll. 
-   * Recommended: 0.1 - 0.12 for "Bugatti" solid feel.
-   * Lower (0.05) = Floaty/Heavy.
-   * Higher (0.2) = Snappy.
-   */
   ease?: number; 
-  /**
-   * If true, adds a subtle skew effect.
-   * WARNING: Can cause "wave/jelly" effect if not used carefully.
-   */
   enableSkew?: boolean;
+  className?: string;
 }
 
-/**
- * SmoothScroll Component
- * 
- * - Desktop: Applies "Inertial/Virtual" scrolling.
- * - Mobile: NATIVE scrolling (Best performance).
- */
 export const SmoothScroll: React.FC<SmoothScrollProps> = ({ 
   children, 
   ease = 0.1, 
-  enableSkew = false 
+  enableSkew = false,
+  className = ''
 }) => {
+  // Container for the visible content (Fixed + Transformed)
   const contentRef = useRef<HTMLDivElement>(null);
+  // Ghost element to force document height (In Flow)
+  const spacerRef = useRef<HTMLDivElement>(null);
   
-  // Mobile/Tablet Detection
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
-  });
+  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const mobileCheck = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024;
-      setIsMobile(mobileCheck);
+  // 1. Feature Detection
+  useLayoutEffect(() => {
+    const checkMobile = () => {
+      // Robust mobile detection: Touch capability or small width
+      const isTouch = window.matchMedia('(pointer: coarse)').matches;
+      const isSmall = window.innerWidth < 1024;
+      setIsMobile(isTouch || isSmall);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    checkMobile();
+    
+    // Debounced resize handler could be added here if needed, 
+    // but lightweight check is usually fine.
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // 2. Scroll State
   const scrollRef = useRef({
     current: 0,
     target: 0
   });
-
   const rafId = useRef<number | null>(null);
   const resizeObserver = useRef<ResizeObserver | null>(null);
 
-  // --- SETUP: SYNC HEIGHT (Desktop Only) ---
+  // 3. Height Synchronization (Desktop Only)
   useLayoutEffect(() => {
     if (isMobile) {
+      // Cleanup desktop styles if switching to mobile
+      if (spacerRef.current) spacerRef.current.style.height = '';
+      if (contentRef.current) contentRef.current.style.transform = '';
       document.body.style.height = '';
-      if (contentRef.current) {
-        contentRef.current.style.transform = '';
-      }
       return;
     }
 
-    const updateHeight = () => {
-      if (contentRef.current) {
-        document.body.style.height = `${contentRef.current.getBoundingClientRect().height}px`;
-      }
-    };
-
-    updateHeight();
-
-    // WRAP IN RAF: Fixes "ResizeObserver loop completed with undelivered notifications"
-    resizeObserver.current = new ResizeObserver(() => {
-      requestAnimationFrame(() => updateHeight());
+    // Initialize Observer
+    resizeObserver.current = new ResizeObserver((entries) => {
+      // Use requestAnimationFrame to avoid "ResizeObserver loop limit exceeded"
+      // by deferring the DOM write to the next frame
+      requestAnimationFrame(() => {
+        for (const entry of entries) {
+          if (!entry || !spacerRef.current) continue;
+          
+          // Get precise height
+          const height = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+          
+          if (height > 0) {
+            spacerRef.current.style.height = `${height}px`;
+            // Redundant check: sometimes body height needs explicit set in some frameworks, 
+            // but the spacer usually handles it naturally in standard flow.
+          }
+        }
+      });
     });
-    
+
     if (contentRef.current) {
       resizeObserver.current.observe(contentRef.current);
     }
 
     return () => {
-      if (resizeObserver.current) resizeObserver.current.disconnect();
-      document.body.style.height = ''; 
+      resizeObserver.current?.disconnect();
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-    // CRITICAL FIX: Removed 'children' from dependency array.
-    // 'ResizeObserver' handles content changes automatically.
-    // Including 'children' caused the cleanup (height='') to run on every re-render,
-    // causing scroll position to jump to top when Mobile Menu state changed.
-  }, [isMobile]);
+  }, [isMobile, children]);
 
-  // --- PHYSICS ENGINE: DESKTOP ONLY ---
+  // 4. Scroll Loop (Desktop Only)
   useEffect(() => {
-    if (isMobile) {
-        if (rafId.current) cancelAnimationFrame(rafId.current);
-        return;
-    }
+    if (isMobile) return;
 
-    const render = () => {
-      if (!contentRef.current) return;
-
+    const loop = () => {
+      // 1. Read Input
       scrollRef.current.target = window.scrollY;
 
-      // 1. Get distance to target
-      const distance = scrollRef.current.target - scrollRef.current.current;
+      // 2. Interpolate
+      const diff = scrollRef.current.target - scrollRef.current.current;
+      const delta = Math.abs(diff);
 
-      // 2. Snap to target if very close (Prevents micro-floating/drifting)
-      if (Math.abs(distance) < 0.1) {
+      if (delta < 0.1) {
         scrollRef.current.current = scrollRef.current.target;
       } else {
-        // 3. Linear Interpolation (The "Smoothness")
-        scrollRef.current.current += distance * ease;
+        scrollRef.current.current += diff * ease;
       }
 
-      // 4. Precision Rounding (Solidity)
-      const y = scrollRef.current.current; 
-      
-      // 5. Calculate Skew (Only if enabled)
-      let skew = 0;
-      if (enableSkew) {
-         // Cap the skew to +/- 2 degrees to prevent "Wave/Jelly" effect
-         skew = (scrollRef.current.target - y) * 0.003;
-         skew = Math.max(Math.min(skew, 2), -2);
+      // 3. Render
+      if (contentRef.current) {
+        const y = scrollRef.current.current;
+        
+        // Optional Skew Effect
+        let skew = 0;
+        if (enableSkew) {
+          skew = diff * 0.003;
+          skew = Math.max(Math.min(skew, 2), -2); // Clamp skew
+        }
+
+        // Apply Transform
+        // Note: We use translate3d for GPU acceleration
+        contentRef.current.style.transform = `translate3d(0, -${y}px, 0) skewY(${skew}deg)`;
       }
 
-      // 6. Apply Transform
-      contentRef.current.style.transform = `translate3d(0, -${y}px, 0) ${enableSkew ? `skewY(${skew}deg)` : ''}`;
-
-      rafId.current = requestAnimationFrame(render);
+      rafId.current = requestAnimationFrame(loop);
     };
 
-    rafId.current = requestAnimationFrame(render);
+    rafId.current = requestAnimationFrame(loop);
 
     return () => {
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-  }, [ease, enableSkew, isMobile]);
+  }, [isMobile, ease, enableSkew]);
 
+  // 5. Render
+  // Mobile: Native flow
+  if (isMobile) {
+    return (
+      <div className={`smooth-scroll-native ${className}`}>
+        {children}
+      </div>
+    );
+  }
+
+  // Desktop: Virtual Scroller
   return (
-    <div 
-      className={isMobile ? '' : 'smooth-scroll-content'} 
-      ref={contentRef}
-      style={isMobile ? { position: 'relative' } : {}}
-    >
-      {children}
-    </div>
+    <>
+      <div className={`smooth-scroll-content ${className}`} ref={contentRef}>
+        {children}
+      </div>
+      {/* Ghost Spacer to provide physical scroll height */}
+      <div className="smooth-scroll-spacer" ref={spacerRef} />
+    </>
   );
 };

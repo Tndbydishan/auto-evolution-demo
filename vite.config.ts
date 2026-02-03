@@ -8,12 +8,21 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './'),
+    },
+  },
   build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         about: resolve(__dirname, 'about.html'),
-        registration: resolve(__dirname, 'registration.html'),
+        booking: resolve(__dirname, 'booking.html'),
+        services: resolve(__dirname, 'services.html'),
+        training: resolve(__dirname, 'training.html'),
+        blogs: resolve(__dirname, 'blogs.html'),
+        contact: resolve(__dirname, 'contact.html'),
       },
     },
   },

@@ -1,22 +1,37 @@
 /* 
- * Smooth Scroll Container
- * Decouples visual position from scroll position
+ * Smooth Scroll Engine Styles - Ghost Spacer Pattern
  */
+
+/* The visible content container - taken out of normal flow */
 .smooth-scroll-content {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: auto; /* Height is determined by content */
+  will-change: transform;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  /* Prevent layout shift artifacts */
+  backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden;
+}
+
+/* The invisible spacer that sits in the document flow to force the scrollbar */
+.smooth-scroll-spacer {
+  display: block;
+  width: 100%;
+  /* Height is set dynamically via JS ResizeObserver */
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Mobile Fallback - Native Scrolling */
+.smooth-scroll-native {
+  position: relative;
+  width: 100%;
   height: auto;
-  overflow: hidden;
-  will-change: transform; /* Hardware acceleration hint */
-  z-index: 1; /* Below Navbar (100) and Preloader (9999) */
-  
-  /* 
-   * Bugatti Feel: 
-   * We add a tiny bit of backface visibility to prevent flickering 
-   * during high-speed GPU transforms.
-   */
-  backface-visibility: hidden;
-  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
 }

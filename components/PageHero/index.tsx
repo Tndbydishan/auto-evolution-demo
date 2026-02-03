@@ -43,6 +43,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
             loop
             muted
             playsInline
+            // Ensure video covers the area without black bars
+            style={{ objectFit: 'cover' }}
           >
             <source src={mediaSource} type="video/mp4" />
             Your browser does not support the video tag.
@@ -57,7 +59,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
         )}
       </div>
 
-      {/* 2. Dark Gradient Overlay (Visibility) */}
+      {/* 2. Gradient Overlay */}
       <div className="page-hero-overlay"></div>
 
       {/* 3. Text Content */}

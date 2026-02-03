@@ -7,11 +7,13 @@
   position: relative;
   
   /* FLOATING LAYOUT CONFIGURATION */
-  /* Wider Mobile Width: calc(100% - 1rem) gives 0.5rem margin on sides (was 1.5rem) */
+  /* Wider Mobile Width: calc(100% - 1rem) gives 0.5rem margin on sides */
   width: calc(100% - 1rem); 
-  margin-top: 5.5rem; /* ~88px */
+  
+  /* REMOVED MARGIN-TOP: Spacing is now handled by the Layout container padding */
   margin-left: auto;
   margin-right: auto;
+  
   border-radius: 0.5rem;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.15);
   
@@ -27,9 +29,8 @@
 
 @media (min-width: 768px) {
   .page-hero-container {
-    /* Wider Tablet Width: calc(100% - 2rem) gives 1rem margin on sides (was 4rem) */
+    /* Wider Tablet Width: calc(100% - 2rem) gives 1rem margin on sides */
     width: calc(100% - 2rem);
-    margin-top: 8rem;
     border-radius: 1.25rem;
     height: 70vh; 
     min-height: 500px;
@@ -40,7 +41,7 @@
 @media (min-width: 1024px) {
   .page-hero-container {
     height: 80vh;
-    /* Increased Max Width for Desktop/4K to be wider than content (was 1600px) */
+    /* Increased Max Width for Desktop/4K to be wider than content */
     max-width: 1800px; 
   }
 }

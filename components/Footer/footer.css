@@ -1,20 +1,18 @@
 /* 
  * Footer Styles
- * Light, clean, and structured.
+ * Redesigned for stable MPA layout.
  */
 
 .footer-section {
   width: 100%;
-  background-color: #f7f7f5; /* Light Theme as requested */
+  background-color: #f7f7f5;
   color: #121212;
   position: relative;
-  overflow: hidden;
   padding: 4rem 1.5rem 2rem 1.5rem;
-  border-top: 1px solid #d12027; /* Red Top Border */
-  margin-top: auto; /* Pushes footer to bottom if content is short */
+  border-top: 1px solid #d12027;
+  /* margin-top: auto REMOVED - Using flex-grow on content instead for better stability */
 }
 
-/* Container */
 .footer-container {
   max-width: 1440px;
   margin: 0 auto;
@@ -23,18 +21,13 @@
   gap: 4rem;
 }
 
-/* =========================================
-   TOP SECTION (Logo & Columns)
-========================================= */
 .footer-top {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
 
-/* Logo Area */
 .footer-brand {
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -43,13 +36,12 @@
 .footer-tagline {
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
-  color: rgba(18, 18, 18, 0.6); /* Darker text for light bg */
+  color: rgba(18, 18, 18, 0.6);
   margin-top: 1rem;
   max-width: 300px;
   line-height: 1.5;
 }
 
-/* SOS Button */
 .footer-sos-btn {
   display: inline-flex;
   align-items: center;
@@ -57,14 +49,12 @@
   background-color: #D12027;
   color: #ffffff;
   padding: 0.85rem 1.75rem;
-  border-radius: 9999px; /* Pill */
+  border-radius: 9999px;
   text-decoration: none;
   margin-top: 1.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(209, 32, 39, 0.3);
   width: fit-content;
-  position: relative;
-  overflow: hidden;
   animation: pulse-red 2s infinite;
 }
 
@@ -76,36 +66,16 @@
   font-weight: bold;
 }
 
-.footer-sos-btn i {
-  font-size: 1.25rem;
-}
-
-.footer-sos-btn:hover {
-  background-color: #b0151b;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(209, 32, 39, 0.4);
-}
-
-/* Pulse animation for urgency */
 @keyframes pulse-red {
   0% { box-shadow: 0 0 0 0 rgba(209, 32, 39, 0.7); }
   70% { box-shadow: 0 0 0 10px rgba(209, 32, 39, 0); }
   100% { box-shadow: 0 0 0 0 rgba(209, 32, 39, 0); }
 }
 
-/* Links Grid */
 .footer-links-wrapper {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile: Stacked */
+  grid-template-columns: 1fr;
   gap: 2.5rem;
-  width: 100%;
-}
-
-/* Column Styling */
-.footer-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
 }
 
 .footer-col-title {
@@ -113,50 +83,42 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: #D12027; /* Brand Red */
-  margin-bottom: 0.5rem;
+  color: #D12027;
+  margin-bottom: 1rem;
 }
 
 .footer-link-list {
   list-style: none;
   padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
 .footer-link {
-  font-family: "Montserrat", sans-serif;
   font-size: 14px;
-  color: rgba(18, 18, 18, 0.6); /* Dark text */
+  color: rgba(18, 18, 18, 0.6);
   text-decoration: none;
   transition: all 0.3s ease;
-  width: fit-content;
 }
 
 .footer-link:hover {
-  color: #D12027; /* Red accent on hover */
-  transform: translateX(4px);
+  color: #D12027;
+  padding-left: 4px;
 }
 
-/* =========================================
-   BOTTOM SECTION (Copyright & Socials)
-========================================= */
 .footer-bottom {
   display: flex;
   flex-direction: column-reverse;
   gap: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.05); /* Subtle light border */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .footer-copyright {
-  font-family: "Montserrat", sans-serif;
   font-size: 12px;
   color: rgba(18, 18, 18, 0.4);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .footer-socials {
@@ -167,8 +129,7 @@
 .footer-social-icon {
   font-size: 20px;
   color: rgba(18, 18, 18, 0.5);
-  transition: color 0.3s ease, transform 0.3s ease;
-  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .footer-social-icon:hover {
@@ -176,42 +137,27 @@
   transform: translateY(-2px);
 }
 
-/* =========================================
-   MEDIA QUERIES
-========================================= */
-
-/* Tablet (Grid starts to form) */
 @media (min-width: 640px) {
   .footer-links-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop */
 @media (min-width: 1024px) {
   .footer-section {
     padding: 6rem 4rem 3rem 4rem;
   }
-  
   .footer-top {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
   }
-
-  .footer-brand {
-    width: 30%;
-  }
-
   .footer-links-wrapper {
     width: 60%;
-    grid-template-columns: repeat(3, 1fr); /* 3 Columns: Main, Company, Legal */
+    grid-template-columns: repeat(3, 1fr);
   }
-
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2rem;
   }
 }

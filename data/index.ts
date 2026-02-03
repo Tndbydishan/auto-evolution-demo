@@ -1,18 +1,18 @@
 import { NavItem } from '../types';
 
 export const NAV_LINKS: NavItem[] = [
-  { id: 'home', href: '/index.html', label: 'Home' },
-  { id: 'about', href: '/about.html', label: 'About' },
-  { id: 'services', href: '#', label: 'Services' },
-  { id: 'training', href: '#', label: 'Training' },
-  { id: 'blogs', href: '#', label: 'News' },
-  { id: 'contact', href: '/registration.html', label: 'Join' },
+  { id: 'home', href: 'index.html', label: 'Home' },
+  { id: 'about', href: 'about.html', label: 'About' },
+  { id: 'services', href: 'services.html', label: 'Services' },
+  { id: 'training', href: 'training.html', label: 'Training' },
+  { id: 'blogs', href: 'blogs.html', label: 'Blogs' },
+  { id: 'contact', href: 'contact.html', label: 'Contact' },
 ];
 
 export const LEGAL_LINKS = [
   { href: '#', label: 'Privacy Policy' },
   { href: '#', label: 'Terms of Service' },
-  { href: '#', label: 'Cookie Policy' },
+  { href: 'booking.html', label: 'Booking' },
   { href: '#', label: 'Sitemap' },
 ];
 
