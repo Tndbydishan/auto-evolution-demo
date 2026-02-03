@@ -11,7 +11,7 @@
   width: calc(100% - 1rem); 
   
   /* LOWERED HERO: Creates space for fixed Navbar & Logo */
-  margin-top: 6.5rem; 
+  margin-top: 6rem; 
   margin-left: auto;
   margin-right: auto;
   
@@ -35,7 +35,7 @@
   .page-hero-container {
     /* Wider Tablet Width: calc(100% - 2rem) gives 1rem margin on sides */
     width: calc(100% - 2rem);
-    margin-top: 8rem; /* Increased spacing for desktop header */
+    margin-top: 7rem; /* Increased spacing for desktop header */
     border-radius: 1.25rem;
     
     /* Balanced height for portrait tablets */
@@ -50,7 +50,7 @@
   .page-hero-container {
     /* Increased margin for desktop aesthetics */
     width: calc(100% - 4rem);
-    
+    margin-top: 6.5rem;
     /* Immersive height for laptops */
     height: 85vh;
     min-height: 720px;
@@ -63,8 +63,9 @@
 @media (min-width: 1440px) {
   .page-hero-container {
     /* Full impact for large monitors */
-    height: 92vh;
-    min-height: 850px;
+    margin-top: 6rem; 
+    height: 85vh;
+    min-height: 820px;
     max-width: 1800px;
   }
 }
