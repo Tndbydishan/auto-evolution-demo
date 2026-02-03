@@ -100,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="footer-bottom">
           <div className="footer-copyright">
             <div>&copy; 2026 Auto Evolution Workshop. All Rights Reserved.</div>
-            <div style={{ marginTop: '0.5em', opacity: 0.8 }}>Developed by Merces Tech</div>
+            <div className="footer-dev-credit">Developed by Merces Tech</div>
           </div>
 
           <div className="footer-socials">

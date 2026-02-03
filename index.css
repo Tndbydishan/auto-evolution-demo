@@ -50,20 +50,47 @@ body.menu-open {
   color: #ffffff;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+/* =========================================
+   SCROLLBAR CONFIGURATION
+========================================= */
+
+/* 
+   LARGE SCREENS (>= 1440px): 
+   Show Custom Designed Scrollbar 
+*/
+@media (min-width: 1440px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f7f7f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 5px;
+    border: 2px solid #f7f7f5;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d12027;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #f7f7f5;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #d1d1d1;
-  border-radius: 5px;
-  border: 2px solid #f7f7f5;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #d12027;
+/* 
+   SMALLER SCREENS (< 1440px): 
+   Hide Scrollbar Visuals but keep functionality 
+*/
+@media (max-width: 1439px) {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  html, body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
