@@ -88,7 +88,7 @@ export const SocialFeed: React.FC = () => {
             <div className="sf-plugin-wrapper">
               <div 
                 className="fb-page" 
-                data-href="https://www.facebook.com/facebook" 
+                data-href="https://www.facebook.com/AutoEvolutionWorkshopLtd" 
                 data-tabs="timeline" 
                 data-width="" /* Leave empty to allow full fluidity up to 500px parent */
                 data-height="600" 
