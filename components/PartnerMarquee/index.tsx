@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './PartnerMarquee.css';
 
-interface Partner {
+export interface Partner {
   name: string;
   icon?: string;         
   logo?: string;         
@@ -10,57 +10,13 @@ interface Partner {
   customWidth?: string;  
 }
 
-export const PartnerMarquee: React.FC = () => {
+interface PartnerMarqueeProps {
+  partners: Partner[];
+}
+
+export const PartnerMarquee: React.FC<PartnerMarqueeProps> = ({ partners }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
-  // UPDATED: Using the 'href method' (Vite Asset URL) to resolve paths dynamically.
-  // This allows assets to live in 'resources/' without moving them to 'public/'.
-  // Vite will bundle these files and update the paths in the final build.
-  const partners: Partner[] = [
-    { 
-      name: "Texa", 
-      logo: new URL('../../resources/logo-TEXA.jpg', import.meta.url).href, 
-      href: "https://www.bosch.com", 
-      customWidth: "75px" 
-    },
-    { 
-      name: "Bosch", 
-      logo: new URL('../../resources/bosch.svg', import.meta.url).href, 
-      href: "https://www.bosch.com", 
-      customWidth: "140px" 
-    },
-    { 
-      name: "Texa Edu", 
-      logo: new URL('../../resources/texaedu.png', import.meta.url).href, 
-      href: "#", 
-      customWidth: "135px" 
-    },
-    { 
-      name: "IMI", 
-      logo: new URL('../../resources/imi-logo-min-original.png', import.meta.url).href, 
-      href: "https://www.motul.com", 
-      customWidth: "190px" 
-    },
-    { 
-      name: "Electude", 
-      logo: new URL('../../resources/electude-logo-png-transparent.png', import.meta.url).href, 
-      href: "https://www.denso.com", 
-      customWidth: "190px" 
-    },
-    { 
-      name: "ASE", 
-      logo: new URL('../../resources/ase-logo.png', import.meta.url).href, 
-      href: "https://www.brembo.com", 
-      customWidth: "80px" 
-    },
-    { 
-      name: "Auto Evolution", 
-      logo: new URL('../../resources/auto-evolution.png', import.meta.url).href, 
-      href: "https://www.brembo.com", 
-      customWidth: "180px" 
-    },
-  ];
 
   // We duplicate the partners list to create the seamless loop effect.
   // [Set 1] [Set 2 (Clone)]
@@ -113,7 +69,7 @@ export const PartnerMarquee: React.FC = () => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [partners]); // Re-run if partners change
 
   return (
     <section className="pm-section" ref={containerRef}>

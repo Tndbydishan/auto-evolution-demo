@@ -1,8 +1,65 @@
 import React from 'react';
 import { TrainingHeader } from '../components/TrainingHeader';
-import { PartnerMarquee } from '../components/PartnerMarquee';
+import { PartnerMarquee, Partner } from '../components/PartnerMarquee';
+
+// Direct Asset Integration (Imports)
+// These imports resolve to the file URL in Vite/Webpack
+import logoTexa from '../resources/logo-TEXA.jpg';
+import logoBosch from '../resources/bosch.svg';
+import logoTexaEdu from '../resources/texaedu.png';
+import logoImi from '../resources/imi-logo-min-original.png';
+import logoElectude from '../resources/electude-logo-png-transparent.png';
+import logoAse from '../resources/ase-logo.png';
+import logoAutoEvo from '../resources/auto-evolution.png';
 
 export const Training: React.FC = () => {
+  
+  // Define Partner Data here in the page component
+  const partners: Partner[] = [
+    { 
+      name: "Texa", 
+      logo: logoTexa, 
+      href: "https://www.bosch.com", 
+      customWidth: "75px" 
+    },
+    { 
+      name: "Bosch", 
+      logo: logoBosch, 
+      href: "https://www.bosch.com", 
+      customWidth: "140px" 
+    },
+    { 
+      name: "Texa Edu", 
+      logo: logoTexaEdu, 
+      href: "#", 
+      customWidth: "135px" 
+    },
+    { 
+      name: "IMI", 
+      logo: logoImi, 
+      href: "https://www.motul.com", 
+      customWidth: "190px" 
+    },
+    { 
+      name: "Electude", 
+      logo: logoElectude, 
+      href: "https://www.denso.com", 
+      customWidth: "190px" 
+    },
+    { 
+      name: "ASE", 
+      logo: logoAse, 
+      href: "https://www.brembo.com", 
+      customWidth: "80px" 
+    },
+    { 
+      name: "Auto Evolution", 
+      logo: logoAutoEvo, 
+      href: "https://www.brembo.com", 
+      customWidth: "180px" 
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       
@@ -11,8 +68,8 @@ export const Training: React.FC = () => {
         imageSrc="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=2940&auto=format&fit=crop"
       />
 
-      {/* NEW: Partner Marquee */}
-      <PartnerMarquee />
+      {/* Reusable Partner Marquee with Passed Data */}
+      <PartnerMarquee partners={partners} />
 
       {/* CONTENT */}
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-12 py-24">
