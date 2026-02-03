@@ -63,7 +63,7 @@
 @media (min-width: 1440px) {
   .page-hero-container {
     /* Full impact for large monitors */
-    margin-top: 6rem; 
+    margin-top: 6.5rem; 
     height: 85vh;
     min-height: 820px;
     max-width: 1800px;
