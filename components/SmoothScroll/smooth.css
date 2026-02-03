@@ -1,37 +1,14 @@
 /* 
- * Smooth Scroll Engine Styles - Ghost Spacer Pattern
+ * Smooth Scroll - Native Mode
+ * Ensures standard document flow to prevent layout collapse.
  */
 
-/* The visible content container - taken out of normal flow */
-.smooth-scroll-content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto; /* Height is determined by content */
-  will-change: transform;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  /* Prevent layout shift artifacts */
-  backface-visibility: hidden; 
-  -webkit-backface-visibility: hidden;
-}
-
-/* The invisible spacer that sits in the document flow to force the scrollbar */
-.smooth-scroll-spacer {
-  display: block;
-  width: 100%;
-  /* Height is set dynamically via JS ResizeObserver */
-  pointer-events: none;
-  visibility: hidden;
-}
-
-/* Mobile Fallback - Native Scrolling */
 .smooth-scroll-native {
-  position: relative;
   width: 100%;
   height: auto;
+  position: relative;
   display: flex;
   flex-direction: column;
+  /* Ensure no overflow hiding prevents scroll */
+  overflow: visible; 
 }

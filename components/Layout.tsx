@@ -32,7 +32,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
 
     if (isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
-        // Small delay to allow menu close animation
         setTimeout(() => {
             window.location.href = targetUrl;
         }, 600);
@@ -42,7 +41,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
   };
 
   return (
-    <div className="bg-[#F7F7F5] text-[#121212] min-h-screen">
+    <div className="bg-[#F7F7F5] text-[#121212] min-h-screen relative">
       
       {/* PRELOADER */}
       {isLoading && (
@@ -51,25 +50,25 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
         </Preloader>
       )}
 
-      {/* FIXED LOGO (Outside SmoothScroll) */}
-      <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto">
+      {/* FIXED LOGO - Z-Index 110 to stay above content */}
+      <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto mix-blend-difference text-[#F7F7F5]">
         <a href="index.html" className="cursor-pointer block">
           <Logo />
         </a>
       </div>
 
-      {/* DESKTOP ACTION BUTTON (Outside SmoothScroll) */}
+      {/* DESKTOP ACTION BUTTON */}
       <div className="fixed top-8 right-12 z-[110] hidden min-[1440px]:block pointer-events-auto">
         <a 
           href="booking.html"
           className="bg-[#D12027] text-white px-8 py-3 rounded-full font-bold uppercase text-[10px] tracking-[0.15em] shadow-md flex items-center justify-center border border-[#D12027] hover:bg-white hover:text-[#D12027] transition-colors duration-300 no-underline"
-          style={{ fontFamily: '"Akira Expanded", sans-serif', mixBlendMode: 'normal' }}
+          style={{ fontFamily: '"Akira Expanded", sans-serif' }}
         >
           Inquire
         </a>
       </div>
 
-      {/* NAVBAR (Outside SmoothScroll) */}
+      {/* NAVBAR */}
       <Navbar 
         links={NAV_LINKS} 
         socials={SOCIALS} 
@@ -79,12 +78,11 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
         activePage={activePage}
       />
 
-      {/* DYNAMIC PAGE CONTENT WITH SMOOTH SCROLL */}
-      {/* Note: SmoothScroll handles the 'fixed' positioning. Animation classes should be inside. */}
-      <main>
-        <SmoothScroll ease={0.12} enableSkew={false}>
-          {/* Apply fade-in animation here so it transforms with the scroll content */}
-          <div className="min-h-screen flex flex-col fade-in-page">
+      {/* MAIN CONTENT - Native Flow */}
+      {/* fade-in-page applied here to ensure content animates in, but doesn't break fixed nav */}
+      <main className="w-full relative z-10 fade-in-page">
+        <SmoothScroll>
+          <div className="min-h-screen flex flex-col">
             
             {/* Content Grows to fill space */}
             <div className="flex-grow">
