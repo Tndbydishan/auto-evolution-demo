@@ -50,7 +50,7 @@
   width: fit-content;
   min-width: 100%;
   /* Animation duration 60s */
-  animation: cisScroll 40s linear infinite; /* Sped up slightly for visibility */
+  animation: cisScroll 60s linear infinite; /* Sped up slightly for visibility */
   will-change: transform;
 }
 
