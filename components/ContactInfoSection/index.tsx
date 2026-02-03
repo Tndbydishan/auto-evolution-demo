@@ -2,10 +2,8 @@ import React from 'react';
 import './ContactInfoSection.css';
 
 export const ContactInfoSection: React.FC = () => {
-  // We duplicate the text array to ensure the scroll is seamless.
-  // The CSS animation translates -50%, so we need enough content to cover 200% width.
-  const baseText = "THE PLACE YOU CAN TRUST";
-  const repetitions = [1, 2, 3, 4]; // Repeat 4 times to be safe on wide screens
+  // Seamless loop configuration
+  const repetitions = [1, 2, 3, 4]; 
 
   return (
     <div className="cis-container">
@@ -17,10 +15,10 @@ export const ContactInfoSection: React.FC = () => {
           {repetitions.map((i) => (
              <React.Fragment key={`set1-${i}`}>
                <span className="cis-marquee-item">
-                 THE PLACE YOU CAN <span style={{ color: 'transparent', WebkitTextStroke: '2px #D12027' }}>TRUST</span>
+                 THE PLACE YOU CAN <span className="cis-text-outline">TRUST</span>
                </span>
-               <span className="cis-marquee-item" style={{ fontSize: '2rem', verticalAlign: 'middle', color: '#D12027' }}>
-                 ✦
+               <span className="cis-marquee-item">
+                 <span className="cis-star">✦</span>
                </span>
              </React.Fragment>
           ))}
@@ -28,10 +26,10 @@ export const ContactInfoSection: React.FC = () => {
           {repetitions.map((i) => (
              <React.Fragment key={`set2-${i}`}>
                <span className="cis-marquee-item">
-                 THE PLACE YOU CAN <span style={{ color: 'transparent', WebkitTextStroke: '2px #D12027' }}>TRUST</span>
+                 THE PLACE YOU CAN <span className="cis-text-outline">TRUST</span>
                </span>
-               <span className="cis-marquee-item" style={{ fontSize: '2rem', verticalAlign: 'middle', color: '#D12027' }}>
-                 ✦
+               <span className="cis-marquee-item">
+                 <span className="cis-star">✦</span>
                </span>
              </React.Fragment>
           ))}
