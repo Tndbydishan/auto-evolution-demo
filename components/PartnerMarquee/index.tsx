@@ -15,13 +15,13 @@ export const PartnerMarquee: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const partners: Partner[] = [
-    { name: "Texa", logo: "/resources/logo-TEXA.jpg", href: "https://www.bosch.com", customWidth: "75px" },
-    { name: "Bosch", logo: "/resources/bosch.svg", href: "https://www.bosch.com", customWidth: "140px" },
-    { name: "Texa Edu", logo: "/resources/texaedu.png", href: "#", customWidth: "135px" },
-    { name: "IMI", logo: "/resources/imi-logo-min-original.png", href: "https://www.motul.com", customWidth: "190px" },
-    { name: "Electude", logo: "/resources/electude-logo-png-transparent.png", href: "https://www.denso.com", customWidth: "190px" },
-    { name: "ASE", logo: "/resources/ase-logo.png", href: "https://www.brembo.com", customWidth: "80px" },
-    { name: "Auto Evolution", logo: "/resources/auto-evolution.png", href: "https://www.brembo.com", customWidth: "180px" },
+    { name: "Texa", logo: "./resources/logo-TEXA.jpg", href: "https://www.bosch.com", customWidth: "75px" },
+    { name: "Bosch", logo: "./resources/bosch.svg", href: "https://www.bosch.com", customWidth: "140px" },
+    { name: "Texa Edu", logo: "./resources/texaedu.png", href: "#", customWidth: "135px" },
+    { name: "IMI", logo: "./resources/imi-logo-min-original.png", href: "https://www.motul.com", customWidth: "190px" },
+    { name: "Electude", logo: "./resources/electude-logo-png-transparent.png", href: "https://www.denso.com", customWidth: "190px" },
+    { name: "ASE", logo: "./resources/ase-logo.png", href: "https://www.brembo.com", customWidth: "80px" },
+    { name: "Auto Evolution", logo: "./resources/auto-evolution.png", href: "https://www.brembo.com", customWidth: "180px" },
   ];
 
   // We duplicate the partners list to create the seamless loop effect.
