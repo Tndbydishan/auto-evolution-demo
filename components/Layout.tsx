@@ -16,13 +16,12 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  // PRELOADER: Only defaults to true if we are on the 'home' page AND haven't seen it yet in this session
+  // PRELOADER: Defaults to true if we are on the 'home' page AND it hasn't been shown yet in this session.
   const [isLoading, setIsLoading] = useState(() => {
-    if (activePage === 'home') {
-      const hasSeen = typeof window !== 'undefined' ? sessionStorage.getItem('hasSeenPreloader') : null;
-      return !hasSeen;
-    }
-    return false;
+    if (activePage !== 'home') return false;
+    // Check if user has already seen the preloader in this session
+    const hasSeenPreloader = sessionStorage.getItem('hasSeenPreloader');
+    return !hasSeenPreloader;
   });
 
   // Manage Body Scroll Lock when Mobile Menu is open
@@ -50,14 +49,15 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
   };
 
   const handlePreloaderComplete = () => {
-    sessionStorage.setItem('hasSeenPreloader', 'true');
     setIsLoading(false);
+    // Mark as seen so it doesn't show again in this session
+    sessionStorage.setItem('hasSeenPreloader', 'true');
   };
 
   return (
     <div className="bg-[#F7F7F5] text-[#121212] min-h-screen relative">
       
-      {/* PRELOADER - Only renders if isLoading is true (Home page only, once per session) */}
+      {/* PRELOADER - Only renders if isLoading is true (Home page only) */}
       {isLoading && (
         <Preloader onComplete={handlePreloaderComplete}>
           <Logo disableLink className="w-full text-[#141414]" />
@@ -65,7 +65,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, activePage }) => {
       )}
 
       {/* FIXED LOGO */}
-      {/* Removed mix-blend-mode: difference. Now solid dark color. */}
       <div className="fixed top-8 left-6 lg:left-12 z-[110] pointer-events-auto text-[#121212]">
         <a href="index.html" className="cursor-pointer block">
           <Logo color="#121212" />

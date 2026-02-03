@@ -49,6 +49,12 @@
   }
 }
 
+@media (min-width: 1500px) {
+  .map-title {
+    font-size: 2.25rem; /* Larger title for wide screens */
+  }
+}
+
 .map-title span {
   color: #D12027;
 }
@@ -93,7 +99,13 @@
 
 @media (min-width: 1280px) {
   .map-frame-wrapper {
-    height: 550px; /* Capped height for large screens */
+    height: 550px; /* Capped height for standard large screens */
+  }
+}
+
+@media (min-width: 1500px) {
+  .map-frame-wrapper {
+    height: 700px; /* Expanded height for 1800px+ width containers */
   }
 }
 

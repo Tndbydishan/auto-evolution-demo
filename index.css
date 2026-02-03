@@ -2,7 +2,7 @@
 html {
   width: 100%;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  /* Removed scroll-behavior: smooth to ensure correct scroll restoration on reload */
 }
 
 *, *:before, *:after {

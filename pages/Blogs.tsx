@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageHero } from '../components/PageHero';
+import { SocialFeed } from '../components/SocialFeed';
 
 export const Blogs: React.FC = () => {
   const articles = [
@@ -21,18 +22,34 @@ export const Blogs: React.FC = () => {
         className="mb-12 md:mb-24"
       />
 
-      {/* CONTENT */}
+      {/* 
+         NEW: Live Social Feed Section 
+         Placed above main articles to highlight "Fresh/Live" content 
+      */}
+      <section className="bg-[#F7F7F5] pb-12">
+        <SocialFeed />
+      </section>
+
+      {/* MAIN ARTICLES CONTENT */}
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-12 pb-24">
+        
+        <div className="flex items-center gap-4 mb-12">
+            <h2 className="text-3xl font-bold uppercase" style={{ fontFamily: 'Akira Expanded' }}>
+              Latest <span className="text-[#D12027]">Articles</span>
+            </h2>
+            <div className="h-1 bg-gray-200 flex-grow"></div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-8 gap-y-16">
           {articles.map((post, idx) => (
              <article key={idx} className="group cursor-pointer flex flex-col gap-4">
-                <div className="aspect-[16/9] w-full overflow-hidden bg-gray-200">
+                <div className="aspect-[16/9] w-full overflow-hidden bg-gray-200 relative">
                    <img 
                     src={post.img} 
                     alt={post.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                    />
+                   <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
                 </div>
                 <div>
                    <span className="text-[#D12027] text-xs font-bold uppercase tracking-widest mb-2 block">{post.cat}</span>

@@ -20,10 +20,11 @@ export const Contact: React.FC = () => {
       
       {/* 
          Updated Container Sizing:
-         - Expanded max-width for large screens (>1500px) as requested
+         - Expanded max-width for large screens (>1500px) to 1800px for wider visual impact
          - Base max-width matches other pages (1440px)
+         - Removed horizontal padding on very large screens for a cleaner edge alignment
       */}
-      <div className="w-full max-w-[1440px] min-[1500px]:max-w-[1650px] mx-auto px-4 md:px-12 pb-24 flex flex-col gap-24">
+      <div className="w-full max-w-[1440px] min-[1500px]:max-w-[1800px] mx-auto px-4 md:px-12 min-[1800px]:px-0 pb-24 flex flex-col gap-24">
         
         {/* Contact Info Marquee & Cards */}
         <ContactInfoSection />

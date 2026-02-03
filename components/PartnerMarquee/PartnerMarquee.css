@@ -1,0 +1,158 @@
+/* 
+ * Partner Marquee Styles
+ * Double-Track Method
+ */
+
+.pm-section {
+  width: 100%;
+  padding: 4rem 0;
+  background-color: #f7f7f5;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.pm-header {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pm-title {
+  font-family: "Akira Expanded", sans-serif;
+  font-size: 1.25rem;
+  color: #121212;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.pm-line {
+  width: 60px;
+  height: 4px;
+  background-color: #00257d; 
+  border-radius: 2px;
+}
+
+/* --- Marquee Track --- */
+.pm-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  display: block; 
+  
+  /* Fade edges */
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.pm-track {
+  display: flex;
+  align-items: center;
+  /* Use gap for consistent spacing instead of margins */
+  gap: 4rem; 
+  /* Important: Width must accommodate all items side by side */
+  width: max-content; 
+  padding: 1rem 0;
+  will-change: transform;
+}
+
+/* --- Partner Item --- */
+.pm-partner-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* CRITICAL: Prevent items from being squashed */
+  flex-shrink: 0; 
+  cursor: pointer;
+  height: 80px; 
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+/* --- Image Logo Styles --- */
+.pm-partner-logo {
+  height: auto;
+  max-height: 50px; 
+  width: auto;
+  object-fit: contain;
+  display: block;
+  
+  filter: grayscale(100%) opacity(0.6);
+  -webkit-filter: grayscale(100%) opacity(0.6);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pm-partner-item:hover .pm-partner-logo {
+  filter: grayscale(0%) opacity(1);
+  -webkit-filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
+}
+
+/* --- Text/Icon Fallback Styles --- */
+.pm-partner-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.pm-partner-item:hover .pm-partner-text {
+  color: #00257d; 
+  transform: scale(1.05);
+}
+
+.pm-partner-icon {
+  font-size: 1.75rem;
+  margin-right: 0.75rem;
+  color: #d1d5db;
+  transition: color 0.3s ease;
+}
+
+.pm-partner-item:hover .pm-partner-icon {
+  color: #00257d;
+}
+
+/* --- Responsive --- */
+@media (min-width: 768px) {
+  .pm-section {
+    padding: 5rem 0;
+  }
+  .pm-title {
+    font-size: 1.75rem;
+  }
+  
+  .pm-track {
+    gap: 6rem; /* Increase gap on desktop */
+  }
+  
+  .pm-partner-text {
+    font-size: 2rem;
+  }
+  .pm-partner-icon {
+    font-size: 2.25rem;
+  }
+  
+  .pm-partner-logo {
+    max-height: 70px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .pm-partner-text {
+    font-size: 2.5rem;
+  }
+  .pm-track {
+    gap: 8rem;
+  }
+}

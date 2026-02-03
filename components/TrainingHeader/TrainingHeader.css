@@ -1,0 +1,287 @@
+/* 
+ * Training Header Styles
+ * Robust, responsive layout with academic accent colors.
+ * Refined for smoother animations and better mobile scaling.
+ */
+
+.th-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #f7f7f5;
+  color: #121212;
+  
+  /* Spacing to clear fixed navbar - slightly less on mobile */
+  margin-top: 5rem;
+  
+  /* Box styling */
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+@media (min-width: 1024px) {
+  .th-container {
+    margin-top: 6rem;
+  }
+}
+
+.th-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Auto height on mobile to fit content naturally without gaps */
+  min-height: auto;
+}
+
+/* --- LEFT COLUMN: CONTENT --- */
+.th-content-col {
+  padding: 2.5rem 1.5rem 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.th-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  /* Smoother fade in */
+  animation: thFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.th-edu-logo {
+  width: 60px; /* Smaller mobile logo */
+  height: 60px;
+  box-shadow: 0 10px 20px -5px rgba(0, 37, 125, 0.3);
+  flex-shrink: 0;
+}
+
+.th-brand-line {
+  height: 2px;
+  background-color: #121212;
+  width: 40px;
+  flex-grow: 0;
+  opacity: 0.2;
+}
+
+.th-brand-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00257d;
+}
+
+.th-headline {
+  font-family: "Akira Expanded", sans-serif;
+  /* Significantly reduced mobile font size for better fit */
+  font-size: 1.75rem; 
+  line-height: 1.1;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  /* Premium easing */
+  animation: thSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  word-break: break-word;
+}
+
+.th-headline-highlight {
+  color: #D12027; /* Brand Red */
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.th-description {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: thSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.th-description strong {
+  color: #121212;
+  font-weight: 600;
+}
+
+.th-stats-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrap on very small screens */
+  gap: 2rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: thSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+}
+
+.th-stat-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+}
+
+.th-stat-value {
+  font-family: "Akira Expanded", sans-serif;
+  font-size: 1.25rem;
+  color: #121212;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.th-stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* --- RIGHT COLUMN: IMAGE --- */
+.th-image-col {
+  position: relative;
+  width: 100%;
+  height: 350px; /* Reduced mobile height */
+  overflow: hidden;
+  background-color: #121212;
+}
+
+.th-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  scale: 1.15;
+  animation: thImageReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0s forwards;
+}
+
+.th-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
+}
+
+.th-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem 1.25rem;
+  border-left: 3px solid #00257d;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: thSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+.th-badge-text {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #121212;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.th-badge-sub {
+  font-size: 0.6rem;
+  color: #6b7280;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+@media (min-width: 768px) {
+  .th-headline {
+    font-size: 2.75rem; /* Tablet font size */
+    line-height: 1;
+  }
+  
+  .th-content-col {
+    padding: 4rem 3rem;
+  }
+
+  .th-image-col {
+    height: 500px;
+  }
+  
+  .th-edu-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .th-stat-value {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .th-grid {
+    grid-template-columns: 1.2fr 1fr; /* Text area slightly wider */
+    min-height: 85vh; /* Restore full height constraint for desktop */
+  }
+
+  .th-content-col {
+    padding: 0 4rem 0 6rem; /* Left indentation */
+  }
+
+  .th-headline {
+    font-size: 3.75rem; /* Desktop font size */
+  }
+
+  .th-image-col {
+    height: 100%; /* Full height of grid */
+    /* Dynamic clip path */
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+    margin-left: -2rem; /* Pull closer */
+  }
+  
+  .th-image-overlay {
+    display: none; 
+  }
+
+  .th-edu-logo {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .th-content-col {
+    padding: 0 6rem 0 8rem;
+  }
+  .th-headline {
+    font-size: 4.75rem; /* Large screen font size */
+  }
+}
+
+/* Animations */
+@keyframes thFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes thSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes thImageReveal {
+  from { opacity: 0; scale: 1.15; }
+  to { opacity: 1; scale: 1; }
+}
