@@ -1,6 +1,6 @@
 /* 
  * PageHero Component Styles
- * Updated for Floating/Gap Layout
+ * Updated for Floating/Gap Layout with Robust Breakpoints
  */
 
 .page-hero-container {
@@ -10,16 +10,19 @@
   /* Wider Mobile Width: calc(100% - 1rem) gives 0.5rem margin on sides */
   width: calc(100% - 1rem); 
   
-  /* REMOVED MARGIN-TOP: Spacing is now handled by the Layout container padding */
+  /* LOWERED HERO: Creates space for fixed Navbar & Logo */
+  margin-top: 6.5rem; 
   margin-left: auto;
   margin-right: auto;
   
   border-radius: 0.5rem;
   box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.15);
   
-  /* Mobile Height: Reduced to prevent overwhelming small screens */
-  height: 50vh; 
-  min-height: 350px;
+  /* --- 1. MOBILE BREAKPOINT (Default < 768px) --- */
+  /* Robust height to ensure content fits comfortably on tall phones */
+  height: 60vh; 
+  min-height: 480px;
+  
   overflow: hidden;
   display: flex;
   align-items: flex-end;
@@ -27,22 +30,42 @@
   transform: translateZ(0);
 }
 
+/* --- 2. TABLET BREAKPOINT (>= 768px) --- */
 @media (min-width: 768px) {
   .page-hero-container {
     /* Wider Tablet Width: calc(100% - 2rem) gives 1rem margin on sides */
     width: calc(100% - 2rem);
+    margin-top: 8rem; /* Increased spacing for desktop header */
     border-radius: 1.25rem;
+    
+    /* Balanced height for portrait tablets */
     height: 70vh; 
-    min-height: 500px;
+    min-height: 600px;
     box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
   }
 }
 
+/* --- 3. DESKTOP / LAPTOP BREAKPOINT (>= 1024px) --- */
 @media (min-width: 1024px) {
   .page-hero-container {
-    height: 80vh;
-    /* Increased Max Width for Desktop/4K to be wider than content */
-    max-width: 1800px; 
+    /* Increased margin for desktop aesthetics */
+    width: calc(100% - 4rem);
+    
+    /* Immersive height for laptops */
+    height: 85vh;
+    min-height: 720px;
+    
+    max-width: 1600px; 
+  }
+}
+
+/* --- 4. LARGE SCREEN BREAKPOINT (>= 1440px) --- */
+@media (min-width: 1440px) {
+  .page-hero-container {
+    /* Full impact for large monitors */
+    height: 92vh;
+    min-height: 850px;
+    max-width: 1800px;
   }
 }
 
@@ -88,7 +111,7 @@
   position: relative;
   z-index: 3;
   width: 100%;
-  padding: 0 1.25rem 2rem 1.25rem; /* Mobile padding */
+  padding: 0 1.5rem 2.5rem 1.5rem; /* Increased mobile padding */
   color: #ffffff;
 }
 
@@ -100,7 +123,7 @@
 
 @media (min-width: 1024px) {
   .page-hero-content {
-    padding: 0 5rem 5rem 5rem;
+    padding: 0 5rem 6rem 5rem;
   }
 }
 
@@ -108,12 +131,12 @@
 .page-hero-subtitle {
   display: block;
   font-family: "Montserrat", sans-serif;
-  font-size: 0.65rem; /* text-xs mobile */
+  font-size: 0.75rem; /* Slightly larger mobile text */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: #D12027;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   opacity: 0;
   animation: heroTextSlideUp 0.8s ease-out 0.5s forwards;
   text-shadow: 0 2px 5px rgba(0,0,0,0.5);
@@ -121,15 +144,15 @@
 
 @media (min-width: 768px) {
   .page-hero-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     letter-spacing: 0.2em;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 }
 
 .page-hero-title {
   font-family: "Akira Expanded", sans-serif;
-  font-size: 1.75rem; /* ~28px mobile friendly */
+  font-size: 2rem; /* Mobile Base */
   font-weight: bold;
   text-transform: uppercase;
   line-height: 0.95;
@@ -142,25 +165,25 @@
 
 @media (min-width: 480px) {
   .page-hero-title {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
   }
 }
 
 @media (min-width: 768px) {
   .page-hero-title {
-    font-size: 4rem; /* ~text-6xl */
+    font-size: 4rem; 
   }
 }
 
 @media (min-width: 1024px) {
   .page-hero-title {
-    font-size: 5rem; 
+    font-size: 5.5rem; 
   }
 }
 
 @media (min-width: 1440px) {
   .page-hero-title {
-    font-size: 6rem;
+    font-size: 7rem;
   }
 }
 

@@ -93,7 +93,13 @@
 
 @media (min-width: 1280px) {
   .map-frame-wrapper {
-    height: 550px; /* Capped height for large screens */
+    height: 550px; /* Capped height for standard large screens */
+  }
+}
+
+@media (min-width: 1500px) {
+  .map-frame-wrapper {
+    height: 650px; /* Expanded height for extra large screens */
   }
 }
 

@@ -19,11 +19,11 @@ export const Contact: React.FC = () => {
       />
       
       {/* 
-         Updated Container Sizing to match other pages:
-         - max-w-[1440px]
-         - padding consistent with About/Services
+         Updated Container Sizing:
+         - Expanded max-width for large screens (>1500px) as requested
+         - Base max-width matches other pages (1440px)
       */}
-      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-12 pb-24 flex flex-col gap-24">
+      <div className="w-full max-w-[1440px] min-[1500px]:max-w-[1650px] mx-auto px-4 md:px-12 pb-24 flex flex-col gap-24">
         
         {/* Contact Info Marquee & Cards */}
         <ContactInfoSection />

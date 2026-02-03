@@ -19,7 +19,6 @@ export const Home: React.FC = () => {
         // Dynamic, high-tech automotive abstract
         mediaSource="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2940&auto=format&fit=crop"
         className="mb-0" // Flush with next section visually or standard gap
-        height="90vh"
       />
 
       {/* 2. INTRODUCTION SECTION */}
